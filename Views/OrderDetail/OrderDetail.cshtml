@@ -1,0 +1,51 @@
+﻿@model DataTable
+@using System.Data
+
+<main>
+    
+    <!-- Table with hoverable rows -->
+    <div class="my-3">
+        <a class="btn btn-primary" asp-controller="OrderDetail" asp-action="Add_OrderDetail">Add User</a>
+    </div>
+    <table class="table table-hover m-2">
+        <thead>
+           
+            <tr>
+                <th scope="col">Order Detail ID</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Product ID</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Actions</th> <!-- Added column for actions -->
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow dataRow in  Model.Rows)
+            {
+                <tr>
+                    <td>@dataRow["OrderDetailID"]</td>
+                    <td>@dataRow["OrderID"]</td>
+                    <td>@dataRow["ProductID"]</td>
+                    <td>@dataRow["Quantity"]</td>
+                    <td>@dataRow["Amount"]</td>
+                    <td>@dataRow["TotalAmount"]</td>
+                    <td>@dataRow["UserID"]</td>
+                    <td>
+                        <a asp-action="Add_OrderDetail" asp-route-OrderDetailID="@dataRow["OrderDetailID"]" class="btn btn-outline-primary btn-sm ">Edit</a>
+
+                        <form method="post" asp-controller="OrderDetail" asp-action="Delete_Orderdetail">
+                            <input type="hidden" name="OrderDetailID" value="@dataRow["OrderDetailID"]" />
+                            <button onclick="return confirm('Delete?')" type="submit" class="btn btn-outline-danger btn-xs">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!-- End Table with hoverable rows -->
+</main>

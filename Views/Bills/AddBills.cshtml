@@ -1,0 +1,61 @@
+﻿@model BillsModel
+<h3>@TempData["BillInsertMsg"]</h3>
+
+<form asp-action="Save" asp-controller="Bills">
+    <div class="container">
+        <div class="form-group">
+
+            @if (Model.BillID != null)
+            {
+                <input type="hidden" asp-for="BillID" />
+            }
+
+            <label><span class="text-danger">*</span>BillNumber </label>
+            <input type="text" class="form-control" asp-for="BillNumber" name="BillNumber" />
+            <span asp-validation-for="BillNumber" class="text-danger"></span>
+
+            <br />
+
+            <label><span class="text-danger">*</span>BillDate </label>
+            <input type="date" class="form-control" asp-for="BillDate" name="BillDate" />
+            <span asp-validation-for="BillDate" class="text-danger"></span>
+
+            <br />
+
+            <label><span class="text-danger">*</span>OrderID </label>
+            <select class="form-control" asp-for="OrderID" asp-items="@(new SelectList(ViewBag.orderList, "OrderID","OrderID"))">
+                <option value="">Select Order</option>
+            </select>
+            <span asp-validation-for="OrderID" class="text-danger"></span>
+
+
+
+            <br />
+
+            <label><span class="text-danger">*</span>TotalAmount</label>
+            <input type="text" class="form-control" asp-for="TotalAmount" name="TotalAmount" />
+            <span asp-validation-for="TotalAmount" class="text-danger"></span>
+
+            <br />
+
+            <label>Discount</label>
+            <input type="text" class="form-control" asp-for="Discount" name="Discount" />
+            <span asp-validation-for="Discount" class="text-danger"></span>
+
+            <br />
+
+            <label><span class="text-danger">*</span>NetAmount</label>
+            <input type="text" class="form-control" asp-for="NetAmount" name="NetAmount" />
+            <span asp-validation-for="NetAmount" class="text-danger"></span>
+            <br/>
+            <label><span class="text-danger">*</span>UserID</label>
+            <input type="text" class="form-control" asp-for="UserID" name="UserID" />
+            <span asp-validation-for="UserID" class="text-danger"></span>
+
+           
+            <button class="btn btn-success">Submit</button>
+        </div>
+        </
+    </div>
+</form>
+

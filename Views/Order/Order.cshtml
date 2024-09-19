@@ -1,0 +1,50 @@
+﻿@model DataTable
+@using System.Data
+
+<main>
+    <!-- Table with hoverable rows -->
+    <div class="my-3">
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Add_Order">Add Order</a>
+    </div>
+    <table class="table table-hover m-2">
+        <thead>
+            
+            <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Payment Mode</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Shipping Address</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Actions</th> <!-- Added column for actions -->
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow dataRow in Model.Rows)
+            {
+                <tr>
+                    <td>@dataRow["OrderID"]</td>
+                    <td>@dataRow["OrderDate"]</td>
+                    <td>@dataRow["CustomerID"]</td>
+                    <td>@dataRow["PaymentMode"]</td>
+                    <td>@dataRow["TotalAmount"]</td>
+                    <td>@dataRow["ShippingAddress"]</td>
+                    <td>@dataRow["UserID"]</td>
+                    <td>
+                        <a asp-action="Add_Order" asp-route-OrderID="@dataRow["OrderID"]" class="btn btn-outline-primary btn-sm ">Edit</a>
+
+                        <form method="post" asp-controller="Order" asp-action="OrderDelete">
+                            <input type="hidden" name="OrderID" value="@dataRow["OrderID"]" />
+                            <button onclick="return confirm('Delete?')" type="submit" class="btn btn-outline-danger btn-xs">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!-- End Table with hoverable rows -->
+</main>
